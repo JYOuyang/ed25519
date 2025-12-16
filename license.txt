@@ -1,3 +1,11 @@
+Adapted version of Peters' original ed25519 library, with modifications to
+support Python wrapping.  Released under the same license terms as the
+original.
+
+
+
+Original license text follows:
+
 Copyright (c) 2015 Orson Peters <orsonpeters@gmail.com>
 
 This software is provided 'as-is', without any express or implied warranty. In no event will the
