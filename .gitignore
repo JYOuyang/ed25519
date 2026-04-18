@@ -2,3 +2,5 @@
 *.so
 *.pyc
 test
+CLAUDE.md
+GEMINI.md

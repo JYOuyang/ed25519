@@ -1,7 +1,39 @@
+import os
+import sys
+import glob
 from ctypes import cdll, create_string_buffer
 import secrets
 
-cl = cdll.LoadLibrary("libed25519.so")
+def _load_lib():
+	# Try to find the compiled library in the package directory
+	pkg_dir = os.path.dirname(__file__)
+	
+	# Look for the library with various possible names
+	# (libed25519.so, libed25519.dylib, or the setuptools-named .so)
+	patterns = [
+		"libed25519.so",
+		"libed25519.dylib",
+		"libed25519*.so",
+		"libed25519*.pyd",
+	]
+	
+	for pattern in patterns:
+		matches = glob.glob(os.path.join(pkg_dir, pattern))
+		if matches:
+			try:
+				return cdll.LoadLibrary(matches[0])
+			except OSError:
+				continue
+				
+	# Fallback for local development/manual build
+	try:
+		return cdll.LoadLibrary("libed25519.so")
+	except OSError:
+		pass
+		
+	raise ImportError("Could not find the ed25519 shared library. Please ensure the package is correctly installed.")
+
+cl = _load_lib()
 
 def gen_seed() -> bytes:
 	return create_string_buffer(secrets.token_bytes(32))
