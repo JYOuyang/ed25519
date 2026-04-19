@@ -2,5 +2,14 @@
 *.so
 *.pyc
 test
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
 CLAUDE.md
 GEMINI.md

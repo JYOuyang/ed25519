@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=77.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -20,7 +20,23 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-exclude = ["ed25519_orlp.csrc"]
+exclude = ["ed25519_orlp.csrc", "ed25519_orlp.csrc.*"]
 
 [tool.setuptools.package-data]
 ed25519_orlp = ["csrc/*"]
+
+[[tool.setuptools.ext-modules]]
+name = "ed25519_orlp.libed25519"
+sources = [
+    "src/ed25519_orlp/csrc/add_scalar.c",
+    "src/ed25519_orlp/csrc/fe.c",
+    "src/ed25519_orlp/csrc/ge.c",
+    "src/ed25519_orlp/csrc/key_exchange.c",
+    "src/ed25519_orlp/csrc/keypair.c",
+    "src/ed25519_orlp/csrc/sc.c",
+    "src/ed25519_orlp/csrc/seed.c",
+    "src/ed25519_orlp/csrc/sha512.c",
+    "src/ed25519_orlp/csrc/sign.c",
+    "src/ed25519_orlp/csrc/verify.c",
+]
+include-dirs = ["src/ed25519_orlp/csrc"]
