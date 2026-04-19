@@ -1,5 +1,5 @@
 import unittest
-from ed25519_orlp.ed25519 import ed25519_create_keypair, ed25519_sign, ed25519_verify, ed25519_key_exchange
+from ed25519_orlp import ed25519_create_keypair, ed25519_sign, ed25519_verify, ed25519_key_exchange
 
 class TestEd25519(unittest.TestCase):
     def test_keypair_creation(self):
