@@ -15,28 +15,30 @@ classifiers = [
 ]
 requires-python = ">=3.9"
 
-[tool.setuptools]
-package-dir = {"" = "src"}
+# setuptools config moved back into setup.py
 
-[tool.setuptools.packages.find]
-where = ["src"]
-exclude = ["ed25519_orlp.csrc", "ed25519_orlp.csrc.*"]
-
-[tool.setuptools.package-data]
-ed25519_orlp = ["csrc/*"]
-
-[[tool.setuptools.ext-modules]]
-name = "ed25519_orlp.libed25519"
-sources = [
-    "src/ed25519_orlp/csrc/add_scalar.c",
-    "src/ed25519_orlp/csrc/fe.c",
-    "src/ed25519_orlp/csrc/ge.c",
-    "src/ed25519_orlp/csrc/key_exchange.c",
-    "src/ed25519_orlp/csrc/keypair.c",
-    "src/ed25519_orlp/csrc/sc.c",
-    "src/ed25519_orlp/csrc/seed.c",
-    "src/ed25519_orlp/csrc/sha512.c",
-    "src/ed25519_orlp/csrc/sign.c",
-    "src/ed25519_orlp/csrc/verify.c",
+[tool.cibuildwheel]
+build = [
+    "cp39-manylinux_x86_64",
+    "cp39-manylinux_aarch64",
+    "cp39-manylinux_armv7l",
+    "cp39-musllinux_x86_64",
+    "cp39-musllinux_aarch64",
+    "cp39-musllinux_armv7l",
+    "cp39-macosx_x86_64",
+    "cp39-macosx_arm64",
+    "cp39-win_amd64",
 ]
-include-dirs = ["src/ed25519_orlp/csrc"]
+
+[tool.cibuildwheel.linux]
+manylinux-x86_64-image = "manylinux2014"
+manylinux-aarch64-image = "manylinux2014"
+manylinux-armv7l-image = "manylinux2014"
+musllinux-x86_64-image = "musllinux_1_2"
+musllinux-aarch64-image = "musllinux_1_2"
+musllinux-armv7l-image = "musllinux_1_2"
+
+[tool.cibuildwheel.macos]
+# Pure C with only stdint.h/stddef.h — 10.9 is the oldest target clang still supports
+deployment-target = "10.9"
+
