@@ -11,8 +11,12 @@ If you need ed25119 for any other purpose, consider pynacl.
 
 ## Installing
 
-[Available in PyPi](https://pypi.org/project/ed25519-orlp/), or run
+[Available in PyPI](https://pypi.org/project/ed25519-orlp/), or run
 `pip install ed25519-orlp`.
+
+## License
+
+`ed25519-orlp` inherits the [zlib](http://www.zlib.net) license, available for perusal in the [LICENSE](LICENSE) file.
 
 ## Original README from Peters' library
 

@@ -13,10 +13,10 @@ If you need ed25119 for any other purpose, consider pynacl.
 """
 
 import os
-import sys
 import glob
 from ctypes import cdll, create_string_buffer
 import secrets
+
 
 def _load_lib():
     """Locate and load the ed25519 shared library."""
@@ -49,11 +49,13 @@ def _load_lib():
 
 cl = _load_lib()
 
+
 def gen_seed() -> bytes:
     """Generate a random 32-byte seed."""
     return secrets.token_bytes(32)
 
-def ed25519_create_keypair(seed: bytes | None = None) -> (bytes, bytes, bytes):
+
+def ed25519_create_keypair(seed: bytes | None = None) -> tuple[bytes, bytes, bytes]:
     """
     Create a new ed25519 keypair.
 
@@ -80,9 +82,10 @@ def ed25519_create_keypair(seed: bytes | None = None) -> (bytes, bytes, bytes):
         seed = gen_seed()
     if seed and len(seed) != 32:
         raise ValueError("Seed must be exactly 32 bytes")
-    
+
     cl.ed25519_create_keypair(pubkey, prvkey, seed)
     return (bytes(pubkey), bytes(prvkey), bytes(seed))
+
 
 def ed25519_sign(message: bytes, pubkey: bytes, prvkey: bytes) -> bytes:
     """
@@ -100,6 +103,7 @@ def ed25519_sign(message: bytes, pubkey: bytes, prvkey: bytes) -> bytes:
     cl.ed25519_sign(sig, message, len(message), pubkey, prvkey)
     return bytes(sig)
 
+
 def ed25519_verify(signature: bytes, message: bytes, pubkey: bytes) -> bool:
     """
     Verify a signature for a message using a public key.
@@ -113,6 +117,7 @@ def ed25519_verify(signature: bytes, message: bytes, pubkey: bytes) -> bool:
         True if the signature is valid, False otherwise.
     """
     return cl.ed25519_verify(signature, message, len(message), pubkey) == 1
+
 
 def ed25519_key_exchange(pubkey: bytes, prvkey: bytes) -> bytes:
     """
