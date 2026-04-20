@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ed25519-orlp"
-version = "0.1.1"
+version = "0.1.2"
 description = "Python wrapper around Orson Peters' Ed25519 implementation"
 readme = "README.md"
 authors = [{name = "Devin Carraway", email = "ed25519-orlp-python@devin.com"}]
