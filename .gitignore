@@ -11,5 +11,7 @@ dist/
 wheels/
 *.egg-info
 
+.venv
+
 CLAUDE.md
 GEMINI.md
