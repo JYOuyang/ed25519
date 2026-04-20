@@ -12,8 +12,7 @@ be converted.
 If you need ed25119 for any other purpose, consider pynacl.
 """
 
-import os
-import glob
+from pathlib import Path
 from ctypes import cdll, create_string_buffer
 import secrets
 
@@ -21,7 +20,7 @@ import secrets
 def _load_lib():
     """Locate and load the ed25519 shared library."""
     # Try to find the compiled library in the package directory
-    pkg_dir = os.path.dirname(__file__)
+    pkg_dir = Path(__file__).parent
 
     # Look for the library with various possible names
     patterns = [
@@ -32,10 +31,9 @@ def _load_lib():
     ]
 
     for pattern in patterns:
-        matches = glob.glob(os.path.join(pkg_dir, pattern))
-        if matches:
+        for match in pkg_dir.glob(pattern):
             try:
-                return cdll.LoadLibrary(matches[0])
+                return cdll.LoadLibrary(str(match))
             except OSError:
                 continue
 
