@@ -1,6 +1,7 @@
 all: lib test
 
 test: lib
+	$(warning NOTE: this is the original orlp C test, not the python module tests)
 	$(CC) -L. -led25519 test.c -o test -Isrc/ed25519_orlp/csrc
 	./test
 
