@@ -10,8 +10,10 @@ build/
 dist/
 wheels/
 *.egg-info
-
 .venv
+
+# cibuildwheel
+wheelhouse/
 
 CLAUDE.md
 GEMINI.md
