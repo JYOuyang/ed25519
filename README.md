@@ -11,8 +11,9 @@ If you need ed25119 for any other purpose, consider pynacl.
 
 ## Installing
 
-[Available in PyPI](https://pypi.org/project/ed25519-orlp/), or run
-`pip install ed25519-orlp`.
+[Available in PyPI](https://pypi.org/project/ed25519-orlp/),
+[piwheels](https://piwheels.org/project/ed25519-orlp/), or run `pip install
+ed25519-orlp`.
 
 ## License
 
