@@ -18,6 +18,7 @@ requires-python = ">=3.9"
 # setuptools config moved back into setup.py
 
 [tool.cibuildwheel]
+test-command = "python -m unittest discover -s {project}/tests"
 build = [
     "cp39-manylinux_x86_64",
     "cp39-manylinux_aarch64",
