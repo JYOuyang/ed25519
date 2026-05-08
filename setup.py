@@ -22,6 +22,7 @@ ed25519_extension = Extension(
     "ed25519_orlp.libed25519",
     sources=glob.glob("src/ed25519_orlp/csrc/*.c"),
     include_dirs=["src/ed25519_orlp/csrc"],
+    define_macros=[("ED25519_BUILD_DLL", "1")],
 )
 
 setup(
