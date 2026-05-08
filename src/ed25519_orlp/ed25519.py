@@ -15,6 +15,7 @@ If you need ed25119 for any other purpose, consider pynacl.
 from pathlib import Path
 from ctypes import cdll, create_string_buffer
 import secrets
+from typing import Optional, Tuple
 
 
 def _load_lib():
@@ -53,7 +54,7 @@ def gen_seed() -> bytes:
     return secrets.token_bytes(32)
 
 
-def ed25519_create_keypair(seed: bytes | None = None) -> tuple[bytes, bytes, bytes]:
+def ed25519_create_keypair(seed: Optional[bytes] = None) -> Tuple[bytes, bytes, bytes]:
     """
     Create a new ed25519 keypair.
 
