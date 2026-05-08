@@ -1,4 +1,5 @@
 import glob
+import sys
 
 from setuptools import Extension, find_packages, setup
 from setuptools.command.bdist_wheel import bdist_wheel
@@ -23,6 +24,7 @@ ed25519_extension = Extension(
     sources=glob.glob("src/ed25519_orlp/csrc/*.c"),
     include_dirs=["src/ed25519_orlp/csrc"],
     define_macros=[("ED25519_BUILD_DLL", "1")],
+    libraries=["advapi32"] if sys.platform == "win32" else [],
 )
 
 setup(
